@@ -375,16 +375,14 @@
     <h2 id="signup-heading">Sign up</h2>
 
     <!--
-      FORM-ACTION NOTE for Matti:
       Form posts to the self-hosted Listmonk instance at lists.mattiheino.com.
-      Before going live, replace REPLACE_WITH_LIST_UUID below with the UUID of
-      the single Listmonk list (e.g. matti-audience). Listmonk reads the
-      attribs[…] form fields as subscriber attributes; per-topic broadcasts
-      target subscribers via attribs.wants_<topic>.
+      The hidden `l` input below carries the UUID of the single Listmonk list
+      "Matti's notes". Listmonk reads the attribs[…] form fields as subscriber
+      attributes; per-topic broadcasts target subscribers via attribs.wants_<topic>.
     -->
     <form method="POST" action="https://lists.mattiheino.com/subscription/form">
 
-      <input type="hidden" name="l" value="REPLACE_WITH_LIST_UUID">
+      <input type="hidden" name="l" value="c872b25c-f489-40fd-98a0-ac11e211650f">
       <input type="hidden" name="nonce" value="">
 
       <p class="intro">Pick what you'd like to hear about. Tick any that apply.</p>
@@ -421,7 +419,7 @@
           <input type="checkbox" name="attribs[wants_civil_preparedness_cohort]" value="true" data-toggles="civil-preparedness-interest">
           <span class="check-text">
             <strong>A course on European civil preparedness and networked resilience (NEW!)</strong>
-            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility in Europe. Focus on the critical "Missing Middle" scale between individuals and households. No date yet, tick to be notified when it runs.</span>
+            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility in Europe. Focus on the critical "Missing Middle" scale between individuals and institutions. No date yet, tick to be notified when it runs.</span>
           </span>
         </label>
 
@@ -454,7 +452,7 @@
 
   <section class="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About me</h2>
-    <p>I work at the intersection of complex systems, behaviour change, and sensemaking. My PhD was about bridging behaviour change and complexity sciences – I do have a previous life in the private sector and startups, more recent applied work having been in e.g. the Finnish Behavioural Policy Team. My current affiliations are with the New England Complex Systems Institute (NECSI), University of Heidelberg (Medical Faculty Mannheim), University of Tampere, and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
+    <p>I work at the intersection of complex systems, behaviour change, and sensemaking – my PhD having been about bridging behaviour change and complexity sciences. I have led an applied life from the military to marketing and startups, more recently in e.g. the Finnish Behavioural Policy Team at the Prime Minister's Office. My current affiliations are with the New England Complex Systems Institute (NECSI), Heidelberg University (Medical Faculty Mannheim), Tampere University (Unit of Social Research: Social Psychology), and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
   </section>
 
   <footer>
