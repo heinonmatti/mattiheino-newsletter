@@ -8,22 +8,26 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600&display=swap">
 
 <style>
   :root {
-    --paper:        #fbf9f4;
-    --paper-tint:   #f3eee2;
+    /* Brand palette pulled from mattiheino.com (ajatuspää käytark logo) */
+    --paper:        #fbf9f4;  /* page background - warm cream */
+    --paper-tint:   #f3eee2;  /* card/input background */
+    --sky:          #bcdceb;  /* hero band - the logo's blue */
+    --sky-deep:     #94c1d4;  /* sky on hover/depth */
+    --red:          #a23039;  /* mattiheino.com title red */
+    --red-deep:     #7c2027;  /* hover red */
     --ink:          #1a1a1a;
     --ink-soft:     #44423d;
     --ink-mute:     #74716a;
     --rule:         #d8d2c0;
-    --accent:       #8a4f1f;
 
-    --serif: 'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
-    --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --serif:        'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
+    --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-    --container: 640px;
+    --container: 660px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,26 +45,51 @@
     text-rendering: optimizeLegibility;
   }
 
+  /* ----- Hero band ----- */
+
+  .hero-band {
+    background: var(--sky);
+    padding: 32px 0 28px;
+    border-bottom: 1px solid color-mix(in srgb, var(--sky-deep) 60%, transparent);
+  }
+  .hero-image-wrap {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 28px;
+    text-align: center;
+  }
+  .hero-image-wrap img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+  }
+
+  /* ----- Container ----- */
+
   .container {
     max-width: var(--container);
     width: 100%;
     margin: 0 auto;
-    padding: 80px 28px 56px;
+    padding: 56px 28px 40px;
   }
+
+  /* ----- Type ----- */
 
   h1 {
     font-family: var(--serif);
+    font-style: italic;
     font-weight: 500;
-    font-size: clamp(32px, 5vw, 44px);
-    line-height: 1.15;
+    font-size: clamp(34px, 5.5vw, 48px);
+    line-height: 1.1;
     letter-spacing: -0.005em;
+    color: var(--red);
     margin-bottom: 18px;
     text-wrap: balance;
   }
 
   .lede {
     font-family: var(--serif);
-    font-style: italic;
     font-weight: 400;
     color: var(--ink-soft);
     font-size: 19px;
@@ -71,54 +100,52 @@
 
   h2 {
     font-family: var(--sans);
-    font-weight: 500;
-    font-size: 13px;
-    letter-spacing: 0.12em;
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
-    color: var(--ink-mute);
-    margin-bottom: 18px;
+    color: var(--red);
+    margin-bottom: 20px;
     padding-bottom: 10px;
     border-bottom: 1px solid var(--rule);
   }
 
   /* ----- Form ----- */
 
-  form {
-    margin-bottom: 56px;
-  }
+  form { margin-bottom: 56px; }
 
   .intro {
     font-family: var(--serif);
     font-size: 17px;
-    margin-bottom: 22px;
+    margin-bottom: 18px;
     color: var(--ink);
   }
 
-  fieldset {
-    border: none;
-    margin-bottom: 28px;
-  }
-
+  fieldset { border: none; margin-bottom: 24px; }
   legend { display: none; }
 
   .check-row {
     display: flex;
     align-items: flex-start;
     gap: 12px;
-    margin-bottom: 14px;
-    padding: 12px 14px;
+    margin-bottom: 12px;
+    padding: 14px 16px;
     border: 1px solid var(--rule);
     background: var(--paper-tint);
     cursor: pointer;
     transition: border-color 0.2s ease, background 0.2s ease;
   }
-  .check-row:hover { border-color: var(--accent); }
+  .check-row:hover { border-color: var(--red); }
+  .check-row:has(input:checked) {
+    border-color: var(--red);
+    background: color-mix(in srgb, var(--sky) 22%, var(--paper-tint));
+  }
   .check-row input[type="checkbox"] {
     margin-top: 5px;
     flex-shrink: 0;
     width: 16px;
     height: 16px;
-    accent-color: var(--accent);
+    accent-color: var(--red);
   }
   .check-row .check-text {
     flex: 1;
@@ -127,29 +154,102 @@
     line-height: 1.5;
     color: var(--ink);
   }
-  .check-row .check-text strong {
-    font-weight: 600;
-  }
+  .check-row .check-text strong { font-weight: 600; }
   .check-row .check-text .note {
     display: block;
     color: var(--ink-soft);
     font-size: 15px;
-    margin-top: 2px;
+    margin-top: 4px;
   }
 
-  .field {
-    margin-bottom: 18px;
+  /* ----- Topic-group section divider ----- */
+
+  .topic-divider {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0 16px;
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
   }
+  .topic-divider::before,
+  .topic-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .topic-divider .label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    font-size: 15.5px;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink-soft);
+    text-align: center;
+    max-width: 30em;
+    line-height: 1.4;
+  }
+
+  /* ----- Conditional textarea ----- */
+
+  .conditional-field {
+    margin: 6px 0 22px;
+    padding: 16px 18px;
+    background: color-mix(in srgb, var(--sky) 30%, var(--paper));
+    border: 1px solid color-mix(in srgb, var(--sky-deep) 70%, transparent);
+    animation: slideIn 0.3s ease;
+  }
+  @keyframes slideIn {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .conditional-field label {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink);
+    margin-bottom: 8px;
+    line-height: 1.4;
+  }
+  .conditional-field textarea {
+    width: 100%;
+    min-height: 70px;
+    font-family: var(--serif);
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    background: var(--paper);
+    color: var(--ink);
+    resize: vertical;
+    transition: border-color 0.2s ease;
+  }
+  .conditional-field textarea:focus {
+    outline: none;
+    border-color: var(--red);
+  }
+
+  /* ----- Standard fields ----- */
+
+  .field { margin-bottom: 16px; }
   .field label {
     display: block;
     font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     color: var(--ink-soft);
     margin-bottom: 6px;
   }
-  .field label .req { color: var(--accent); }
+  .field label .req { color: var(--red); }
   .field input[type="text"],
   .field input[type="email"] {
     width: 100%;
@@ -164,46 +264,51 @@
   .field input[type="text"]:focus,
   .field input[type="email"]:focus {
     outline: none;
-    border-color: var(--accent);
+    border-color: var(--red);
   }
+
+  /* ----- Submit ----- */
 
   button[type="submit"] {
     font-family: var(--sans);
-    font-weight: 500;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    padding: 12px 28px;
-    border: 1px solid var(--ink);
-    background: var(--ink);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 13px 32px;
+    margin-top: 8px;
+    border: 1px solid var(--red);
+    background: var(--red);
     color: var(--paper);
     cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
+    transition: background 0.2s ease, border-color 0.2s ease;
   }
   button[type="submit"]:hover {
-    background: var(--paper);
-    color: var(--ink);
+    background: var(--red-deep);
+    border-color: var(--red-deep);
   }
 
   .form-note {
     font-family: var(--sans);
-    font-size: 14px;
-    line-height: 1.5;
+    font-size: 13.5px;
+    line-height: 1.55;
     color: var(--ink-mute);
     margin-top: 18px;
     max-width: 44em;
   }
   .form-note a {
-    color: var(--accent);
+    color: var(--red);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
+  .form-note a:hover { color: var(--red-deep); }
 
   /* ----- About ----- */
 
   .about p {
     font-family: var(--serif);
-    font-size: 17px;
+    font-size: 17.5px;
     line-height: 1.65;
     color: var(--ink);
     max-width: 38em;
@@ -212,35 +317,53 @@
   /* ----- Footer ----- */
 
   footer {
-    margin-top: 64px;
-    padding-top: 24px;
+    margin-top: 56px;
+    padding-top: 22px;
     border-top: 1px solid var(--rule);
     font-family: var(--sans);
     font-size: 13px;
     color: var(--ink-mute);
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    align-items: center;
+    gap: 0;
   }
   footer a {
     color: var(--ink-soft);
     text-decoration: none;
     border-bottom: 1px solid transparent;
     transition: color 0.2s, border-color 0.2s;
+    padding: 4px 0;
   }
-  footer a:hover { color: var(--accent); border-color: var(--accent); }
+  footer a:hover { color: var(--red); border-bottom-color: var(--red); }
+  footer .dot {
+    display: inline-block;
+    margin: 0 14px;
+    color: var(--rule);
+    font-weight: 600;
+  }
 
   /* ----- Responsive ----- */
 
   @media (max-width: 560px) {
-    .container { padding: 56px 22px 40px; }
+    .hero-band { padding: 24px 0 20px; }
+    .hero-image-wrap { padding: 0 20px; }
+    .container { padding: 40px 22px 32px; }
     body { font-size: 17px; }
-    h1 { font-size: 30px; }
-    .lede { font-size: 17.5px; margin-bottom: 36px; }
+    h1 { font-size: 28px; }
+    .lede { font-size: 17px; margin-bottom: 36px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+    footer .dot { display: none; }
   }
 </style>
 </head>
 <body>
+
+<div class="hero-band">
+  <div class="hero-image-wrap">
+    <img src="assets/ajatuspaa.jpg" alt="Two stylised heads, one thinking about the other; both contain cityscapes (the ajatuspää käytäytymisarkkitehtuuri logo).">
+  </div>
+</div>
 
 <main class="container">
 
@@ -253,14 +376,16 @@
 
     <!--
       FORM-ACTION NOTE for Matti:
-      During Tuesday→Wednesday (backup phase): replace YOUR_FORMSPREE_ID below with the
-      ID of the new Formspree form you create at formspree.io.
-      Once Listmonk is online (Wednesday/Thursday), change the action to:
-        https://lists.mattiheino.com/subscription/form
-      and convert the three checkboxes' name="topic" values to name="l" with the
-      corresponding Listmonk list UUIDs.
+      Form posts to the self-hosted Listmonk instance at lists.mattiheino.com.
+      Before going live, replace REPLACE_WITH_LIST_UUID below with the UUID of
+      the single Listmonk list (e.g. matti-audience). Listmonk reads the
+      attribs[…] form fields as subscriber attributes; per-topic broadcasts
+      target subscribers via attribs.wants_<topic>.
     -->
-    <form method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ID">
+    <form method="POST" action="https://lists.mattiheino.com/subscription/form">
+
+      <input type="hidden" name="l" value="REPLACE_WITH_LIST_UUID">
+      <input type="hidden" name="nonce" value="">
 
       <p class="intro">Pick what you'd like to hear about. Tick any that apply.</p>
 
@@ -268,28 +393,37 @@
         <legend>Topics</legend>
 
         <label class="check-row">
-          <input type="checkbox" name="topic" value="blog">
+          <input type="checkbox" name="attribs[wants_blog]" value="true">
           <span class="check-text">
             <strong>New blog posts and research at mattiheino.com.</strong>
             <span class="note">Sent when something is published.</span>
           </span>
         </label>
 
+        <div class="topic-divider" role="separator" aria-label="Upcoming courses">
+          <span class="label">Upcoming training on the New England Complex Systems Institute platform (paid):</span>
+        </div>
+
         <label class="check-row">
-          <input type="checkbox" name="topic" value="complexity-course">
+          <input type="checkbox" name="attribs[wants_complexity_course]" value="true" data-course-checkbox>
           <span class="check-text">
             <strong>A course on behaviour change in complex systems.</strong>
-            <span class="note">A possible course on bringing complex-systems thinking into behaviour-change practice. Tick to be told if it runs.</span>
+            <span class="note">A course on bringing complex-systems thinking into behaviour-change research and practice. No date yet, tick to be notified when it runs.</span>
           </span>
         </label>
 
         <label class="check-row">
-          <input type="checkbox" name="topic" value="civil-preparedness-cohort">
+          <input type="checkbox" name="attribs[wants_civil_preparedness_cohort]" value="true" data-course-checkbox>
           <span class="check-text">
             <strong>A course on European civil preparedness and networked resilience.</strong>
-            <span class="note">A possible cohort for people who plan preparedness at the community and town scale. Tick to be told if it runs.</span>
+            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility. Focus on the critical "Missing Middle" scale between individuals and households. No date yet, tick to be notified when it runs.</span>
           </span>
         </label>
+
+        <div id="course-interest-field" class="conditional-field" hidden>
+          <label for="course-interest">If you took part in such a course, what would you like to learn?</label>
+          <textarea id="course-interest" name="attribs[course_interest_note]" rows="3" disabled></textarea>
+        </div>
 
       </fieldset>
 
@@ -315,16 +449,38 @@
 
   <section class="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About me</h2>
-    <p>I work at the intersection of complex systems and behaviour change. My affiliations are with the New England Complex Systems Institute (NECSI), the University of Heidelberg (Medical Faculty Mannheim), the University of Tampere, and the World Health Network. Locally, I run the Foresight &amp; Preparedness Forum in Hamina, Finland.</p>
+    <p>I work at the intersection of complex systems, behaviour change, and sensemaking. My affiliations are with the New England Complex Systems Institute (NECSI), the University of Heidelberg (Medical Faculty Mannheim), the University of Tampere, and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
   </section>
 
   <footer>
     <a href="/privacy.html">Privacy notice</a>
+    <span class="dot">·</span>
     <a href="https://www.mattiheino.com" target="_blank" rel="noopener">mattiheino.com</a>
-    <a href="https://github.com/heinonmatti" target="_blank" rel="noopener">GitHub</a>
+    <span class="dot">·</span>
+    <a href="https://www.preparedness.fi" target="_blank" rel="noopener">preparedness.fi</a>
   </footer>
 
 </main>
+
+<script>
+  (function () {
+    var checkboxes = document.querySelectorAll('[data-course-checkbox]');
+    var field = document.getElementById('course-interest-field');
+    var textarea = document.getElementById('course-interest');
+    if (!checkboxes.length || !field || !textarea) return;
+
+    function update() {
+      var any = Array.prototype.some.call(checkboxes, function (cb) { return cb.checked; });
+      field.hidden = !any;
+      textarea.disabled = !any;
+    }
+
+    Array.prototype.forEach.call(checkboxes, function (cb) {
+      cb.addEventListener('change', update);
+    });
+    update();
+  })();
+</script>
 
 </body>
 </html>

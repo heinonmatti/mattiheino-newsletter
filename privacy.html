@@ -8,22 +8,25 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600&display=swap">
 
 <style>
   :root {
     --paper:        #fbf9f4;
     --paper-tint:   #f3eee2;
+    --sky:          #bcdceb;
+    --sky-deep:     #94c1d4;
+    --red:          #a23039;
+    --red-deep:     #7c2027;
     --ink:          #1a1a1a;
     --ink-soft:     #44423d;
     --ink-mute:     #74716a;
     --rule:         #d8d2c0;
-    --accent:       #8a4f1f;
 
-    --serif: 'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
-    --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    --serif:        'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
+    --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-    --container: 640px;
+    --container: 660px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -41,19 +44,35 @@
     text-rendering: optimizeLegibility;
   }
 
+  .hero-band {
+    background: var(--sky);
+    padding: 32px 0 28px;
+    border-bottom: 1px solid color-mix(in srgb, var(--sky-deep) 60%, transparent);
+  }
+  .hero-image-wrap {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 28px;
+    text-align: center;
+  }
+  .hero-image-wrap img { max-width: 100%; height: auto; display: inline-block; }
+
   .container {
     max-width: var(--container);
     width: 100%;
     margin: 0 auto;
-    padding: 80px 28px 56px;
+    padding: 56px 28px 40px;
   }
 
   h1 {
     font-family: var(--serif);
+    font-style: italic;
     font-weight: 500;
-    font-size: clamp(30px, 4.5vw, 38px);
-    line-height: 1.2;
-    margin-bottom: 8px;
+    font-size: clamp(30px, 4.5vw, 40px);
+    line-height: 1.15;
+    color: var(--red);
+    margin-bottom: 6px;
   }
 
   .updated {
@@ -100,52 +119,62 @@
     content: "–";
     position: absolute;
     left: 0;
-    color: var(--accent);
+    color: var(--red);
   }
 
-  strong {
-    font-weight: 600;
-    color: var(--ink);
-  }
+  strong { font-weight: 600; color: var(--ink); }
 
   a {
-    color: var(--accent);
+    color: var(--red);
     text-decoration: underline;
     text-decoration-thickness: 1px;
     text-underline-offset: 3px;
   }
-
-  hr {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 48px 0 24px;
-  }
+  a:hover { color: var(--red-deep); }
 
   footer {
-    margin-top: 48px;
-    padding-top: 24px;
+    margin-top: 56px;
+    padding-top: 22px;
     border-top: 1px solid var(--rule);
     font-family: var(--sans);
     font-size: 13px;
     color: var(--ink-mute);
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    align-items: center;
   }
   footer a {
     color: var(--ink-soft);
     text-decoration: none;
     border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+    padding: 4px 0;
   }
-  footer a:hover { color: var(--accent); border-color: var(--accent); }
+  footer a:hover { color: var(--red); border-bottom-color: var(--red); }
+  footer .dot {
+    display: inline-block;
+    margin: 0 14px;
+    color: var(--rule);
+    font-weight: 600;
+  }
 
   @media (max-width: 560px) {
-    .container { padding: 56px 22px 40px; }
+    .hero-band { padding: 24px 0 20px; }
+    .hero-image-wrap { padding: 0 20px; }
+    .container { padding: 40px 22px 32px; }
     body { font-size: 17px; }
+    footer { flex-direction: column; align-items: flex-start; gap: 6px; }
+    footer .dot { display: none; }
   }
 </style>
 </head>
 <body>
+
+<div class="hero-band">
+  <div class="hero-image-wrap">
+    <img src="assets/ajatuspaa.jpg" alt="Two stylised heads, one thinking about the other; both contain cityscapes (the ajatuspää käytäytymisarkkitehtuuri logo).">
+  </div>
+</div>
 
 <main class="container">
 
@@ -161,6 +190,7 @@
     <li>Your <strong>email address</strong> (required – I cannot send you anything without it).</li>
     <li>Your <strong>first name</strong> (optional – used in greetings if you give it).</li>
     <li>The <strong>topics you ticked</strong> at sign-up (so I send only what you asked for).</li>
+    <li>If you ticked one of the courses, your <strong>free-text answer</strong> to "what would you like to learn?" (optional). Used to orient what I plan; not shared.</li>
   </ul>
   <p>I do not run analytics on this page, log IP addresses, or fingerprint browsers. Cloudflare (the DNS service in front of the site) sees IP addresses for routing and basic security purposes; Cloudflare does not retain those for me and I cannot see them.</p>
 
@@ -194,7 +224,10 @@
 
   <footer>
     <a href="/">Sign-up page</a>
+    <span class="dot">·</span>
     <a href="https://www.mattiheino.com" target="_blank" rel="noopener">mattiheino.com</a>
+    <span class="dot">·</span>
+    <a href="https://www.preparedness.fi" target="_blank" rel="noopener">preparedness.fi</a>
   </footer>
 
 </main>

@@ -1,12 +1,30 @@
 # mattiheino-newsletter
 
-Static sign-up page for `newsletter.mattiheino.com`. Hosted on Cloudflare Pages, DNS at Cloudflare, form initially backed by Formspree, eventually by self-hosted Listmonk on Hetzner.
+Static sign-up page for `newsletter.mattiheino.com`. Hosted on Cloudflare Pages, DNS at Cloudflare, form posts to a self-hosted Listmonk instance at `lists.mattiheino.com` running on the Hetzner VPS.
+
+Brand follows the ajatuspää käytäytymisarkkitehtuuri identity from mattiheino.com (sky-blue hero band with the two-heads logo, deep red as the title and CTA accent, warm cream page).
 
 ## Files
 
-- `index.html` – sign-up page with three-checkbox form (blog posts, complexity course, civil-preparedness cohort)
-- `privacy.html` – privacy notice published at `/privacy.html`
-- No build step; everything is in those two files plus README
+- `index.html` – sign-up page with three-checkbox form (blog posts, complexity course, civil-preparedness cohort) plus a conditional textarea ("If you took part in such a course, what would you like to learn?") that appears when either course checkbox is ticked.
+- `privacy.html` – privacy notice published at `/privacy.html`.
+- `assets/ajatuspaa.jpg` – the logo used in the hero band on both pages.
+- No build step; static HTML + inline CSS + ~25 lines of vanilla JavaScript at the bottom of `index.html`.
+
+## Form architecture
+
+**One Listmonk list with topic preferences as subscriber attributes**, rather than three separate lists. Form fields:
+
+- `name` (first name, optional)
+- `email` (required)
+- `attribs[wants_blog]=true` (when blog checkbox ticked)
+- `attribs[wants_complexity_course]=true` (when complexity-course checkbox ticked)
+- `attribs[wants_civil_preparedness_cohort]=true` (when civil-preparedness checkbox ticked)
+- `attribs[course_interest_note]=...` (free-text answer to the conditional question, present only when at least one course checkbox is ticked)
+- `l=<list-UUID>` (hidden, the single list's UUID)
+- `nonce` (hidden, Listmonk's CSRF token; left empty for public form)
+
+This collapses the email flow to one confirmation + one merged conditional welcome. Per-topic broadcasts use Listmonk segment filtering on `attribs->>'wants_<topic>'`.
 
 ## Deployment
 
@@ -15,34 +33,11 @@ Static sign-up page for `newsletter.mattiheino.com`. Hosted on Cloudflare Pages,
 3. Cloudflare DNS for `mattiheino.com` → add CNAME: `newsletter` → `<project>.pages.dev`, proxied (orange cloud).
 4. Cloudflare Pages → Custom domains → add `newsletter.mattiheino.com`. TLS provisions automatically.
 
-## Form action – switch from Formspree to Listmonk
+## Pre-deploy: substitute the Listmonk list UUID
 
-The form currently posts to a Formspree placeholder. Two changes will happen over the build:
+Before pushing the repo for the first deployment, replace `REPLACE_WITH_LIST_UUID` in `index.html` with the UUID of the single Listmonk list (created during Listmonk install, Phase 2 of the build-plan in `personal-assistant/projects/Personal/Marketing/expression-of-interest/build-plan.md`).
 
-### Phase 1: Formspree backup (Tuesday/Wednesday 5–6 May 2026)
-
-In `index.html`, replace `YOUR_FORMSPREE_ID` with the real ID from a new Formspree form ("mattiheino.com newsletter signup", notification email `matti@mattiheino.com`). Submissions land in Formspree's dashboard and email Matti per submission.
-
-### Phase 2: Listmonk live (Wednesday/Thursday 6–7 May 2026)
-
-Architecture: **one Listmonk list with topic preferences stored as subscriber attributes (`attribs`)** rather than three separate lists. This collapses six emails (3 confirmations + 3 welcomes) to two (1 confirmation + 1 merged conditional welcome). Per-topic broadcasts target subscriber segments filtered by `attribs.wants_<topic>`.
-
-Once Listmonk is online at `lists.mattiheino.com`:
-
-1. One Listmonk list exists: `matti-audience` (or similar). Capture its UUID.
-2. In `index.html`, change the `<form action="...">` to `https://lists.mattiheino.com/subscription/form`.
-3. Add a hidden field with the list UUID: `<input type="hidden" name="l" value="<list-UUID>">`.
-4. Add Listmonk's required hidden nonce field: `<input type="hidden" name="nonce" value="">`.
-5. Rename the three checkboxes' `name` from `topic` to the attribute form: `attribs[wants_blog]`, `attribs[wants_complexity_course]`, `attribs[wants_civil_preparedness_cohort]`. Set `value="true"` on each.
-6. Push, Cloudflare Pages auto-deploys.
-
-The merged welcome campaign uses Listmonk's Go-template conditionals to include only the lines for topics the subscriber actually ticked. See `welcome-emails.md` in `personal-assistant/projects/Personal/Marketing/expression-of-interest/` for the exact template.
-
-For per-topic broadcasts, create a campaign and set the segment filter to e.g. `attribs->>'wants_blog' = 'true'`.
-
-## Privacy notice URL
-
-`https://newsletter.mattiheino.com/privacy.html`. Linked from the sign-up form's footer and from the form-note line beneath the submit button.
+The form submits to `https://lists.mattiheino.com/subscription/form` regardless; only the hidden `l` value needs to be filled in.
 
 ## Local preview
 
