@@ -12,13 +12,13 @@
 
 <style>
   :root {
-    /* Brand palette pulled from mattiheino.com (ajatuspää käytark logo) */
+    /* Brand palette extracted from the ajatuspää käytark logo (sampled pixels) */
     --paper:        #fbf9f4;  /* page background - warm cream */
     --paper-tint:   #f3eee2;  /* card/input background */
-    --sky:          #bcdceb;  /* hero band - the logo's blue */
-    --sky-deep:     #94c1d4;  /* sky on hover/depth */
-    --red:          #a23039;  /* mattiheino.com title red */
-    --red-deep:     #7c2027;  /* hover red */
+    --sky:          #a6d9ec;  /* exact logo background blue (RGB 166, 217, 236) */
+    --sky-deep:     #7ab2c8;  /* derived darker sky for borders */
+    --red:          #890016;  /* exact logo red-building (RGB 137, 0, 22) */
+    --red-deep:     #6c0011;  /* derived darker red for hover */
     --ink:          #1a1a1a;
     --ink-soft:     #44423d;
     --ink-mute:     #74716a;
@@ -395,34 +395,39 @@
         <label class="check-row">
           <input type="checkbox" name="attribs[wants_blog]" value="true">
           <span class="check-text">
-            <strong>New blog posts and research at mattiheino.com.</strong>
+            <strong>New blog posts and research</strong>
             <span class="note">Sent when something is published.</span>
           </span>
         </label>
 
         <div class="topic-divider" role="separator" aria-label="Upcoming courses">
-          <span class="label">Upcoming training on the New England Complex Systems Institute platform (paid):</span>
+          <span class="label">You can find my content on e.g. <a href="https://www.youtube.com/playlist?list=PLcKToLYD7YE3qcS2NsXer03bRaSQDOh4L" target="_blank" rel="noopener">YouTube</a>, but I also instruct (non-free) courses on the New England Complex Systems Institute platform:</span>
         </div>
 
         <label class="check-row">
-          <input type="checkbox" name="attribs[wants_complexity_course]" value="true" data-course-checkbox>
+          <input type="checkbox" name="attribs[wants_complexity_course]" value="true" data-toggles="complexity-interest">
           <span class="check-text">
-            <strong>A course on behaviour change in complex systems.</strong>
-            <span class="note">A course on bringing complex-systems thinking into behaviour-change research and practice. No date yet, tick to be notified when it runs.</span>
+            <strong>Understanding and Shaping Complex Social Systems</strong>
+            <span class="note">A course on bringing complex-systems thinking into behaviour-change research and practice. No next date yet, tick to be notified when it runs.</span>
           </span>
         </label>
+
+        <div id="complexity-interest" class="conditional-field" hidden>
+          <label for="complexity-interest-note">If you took part in this course, what would you like to learn?</label>
+          <textarea id="complexity-interest-note" name="attribs[complexity_course_interest_note]" rows="3" disabled></textarea>
+        </div>
 
         <label class="check-row">
-          <input type="checkbox" name="attribs[wants_civil_preparedness_cohort]" value="true" data-course-checkbox>
+          <input type="checkbox" name="attribs[wants_civil_preparedness_cohort]" value="true" data-toggles="civil-preparedness-interest">
           <span class="check-text">
-            <strong>A course on European civil preparedness and networked resilience.</strong>
-            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility. Focus on the critical "Missing Middle" scale between individuals and households. No date yet, tick to be notified when it runs.</span>
+            <strong>A course on European civil preparedness and networked resilience (NEW!)</strong>
+            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility in Europe. Focus on the critical "Missing Middle" scale between individuals and households. No date yet, tick to be notified when it runs.</span>
           </span>
         </label>
 
-        <div id="course-interest-field" class="conditional-field" hidden>
-          <label for="course-interest">If you took part in such a course, what would you like to learn?</label>
-          <textarea id="course-interest" name="attribs[course_interest_note]" rows="3" disabled></textarea>
+        <div id="civil-preparedness-interest" class="conditional-field" hidden>
+          <label for="civil-preparedness-interest-note">If you took part in this course, what would you like to learn?</label>
+          <textarea id="civil-preparedness-interest-note" name="attribs[civil_preparedness_interest_note]" rows="3" disabled></textarea>
         </div>
 
       </fieldset>
@@ -449,7 +454,7 @@
 
   <section class="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About me</h2>
-    <p>I work at the intersection of complex systems, behaviour change, and sensemaking. My affiliations are with the New England Complex Systems Institute (NECSI), the University of Heidelberg (Medical Faculty Mannheim), the University of Tampere, and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
+    <p>I work at the intersection of complex systems, behaviour change, and sensemaking. My PhD was about bridging behaviour change and complexity sciences – I do have a previous life in the private sector and startups, more recent applied work having been in e.g. the Finnish Behavioural Policy Team. My current affiliations are with the New England Complex Systems Institute (NECSI), University of Heidelberg (Medical Faculty Mannheim), University of Tampere, and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
   </section>
 
   <footer>
@@ -464,21 +469,23 @@
 
 <script>
   (function () {
-    var checkboxes = document.querySelectorAll('[data-course-checkbox]');
-    var field = document.getElementById('course-interest-field');
-    var textarea = document.getElementById('course-interest');
-    if (!checkboxes.length || !field || !textarea) return;
-
-    function update() {
-      var any = Array.prototype.some.call(checkboxes, function (cb) { return cb.checked; });
-      field.hidden = !any;
-      textarea.disabled = !any;
-    }
-
+    /* Each checkbox with data-toggles="<id>" controls the visibility of the
+       <div id="<id>"> immediately following it. Disabled textareas are not
+       submitted, so unticking a course removes its note from the payload. */
+    var checkboxes = document.querySelectorAll('[data-toggles]');
     Array.prototype.forEach.call(checkboxes, function (cb) {
+      var field = document.getElementById(cb.dataset.toggles);
+      if (!field) return;
+      var textarea = field.querySelector('textarea');
+
+      function update() {
+        field.hidden = !cb.checked;
+        if (textarea) textarea.disabled = !cb.checked;
+      }
+
       cb.addEventListener('change', update);
+      update();
     });
-    update();
   })();
 </script>
 

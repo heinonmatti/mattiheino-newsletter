@@ -20,7 +20,8 @@ Brand follows the ajatuspää käytäytymisarkkitehtuuri identity from mattihein
 - `attribs[wants_blog]=true` (when blog checkbox ticked)
 - `attribs[wants_complexity_course]=true` (when complexity-course checkbox ticked)
 - `attribs[wants_civil_preparedness_cohort]=true` (when civil-preparedness checkbox ticked)
-- `attribs[course_interest_note]=...` (free-text answer to the conditional question, present only when at least one course checkbox is ticked)
+- `attribs[complexity_course_interest_note]=...` (free-text answer for the complexity course; present only when that course is ticked)
+- `attribs[civil_preparedness_interest_note]=...` (free-text answer for the civil-preparedness cohort; present only when that course is ticked)
 - `l=<list-UUID>` (hidden, the single list's UUID)
 - `nonce` (hidden, Listmonk's CSRF token; left empty for public form)
 
