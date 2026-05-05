@@ -25,15 +25,20 @@ In `index.html`, replace `YOUR_FORMSPREE_ID` with the real ID from a new Formspr
 
 ### Phase 2: Listmonk live (Wednesday/Thursday 6–7 May 2026)
 
+Architecture: **one Listmonk list with topic preferences stored as subscriber attributes (`attribs`)** rather than three separate lists. This collapses six emails (3 confirmations + 3 welcomes) to two (1 confirmation + 1 merged conditional welcome). Per-topic broadcasts target subscriber segments filtered by `attribs.wants_<topic>`.
+
 Once Listmonk is online at `lists.mattiheino.com`:
 
-1. Three lists exist in Listmonk: `newsletter`, `complexity-course`, `civil-preparedness-cohort`. Capture their UUIDs.
+1. One Listmonk list exists: `matti-audience` (or similar). Capture its UUID.
 2. In `index.html`, change the `<form action="...">` to `https://lists.mattiheino.com/subscription/form`.
-3. Change each `<input type="checkbox" name="topic" value="…">` to `<input type="checkbox" name="l" value="<list-UUID>">` with the corresponding UUID.
-4. Listmonk requires a hidden `nonce` field; add `<input type="hidden" name="nonce" value="">` inside the form.
-5. Push, Cloudflare Pages auto-deploys.
+3. Add a hidden field with the list UUID: `<input type="hidden" name="l" value="<list-UUID>">`.
+4. Add Listmonk's required hidden nonce field: `<input type="hidden" name="nonce" value="">`.
+5. Rename the three checkboxes' `name` from `topic` to the attribute form: `attribs[wants_blog]`, `attribs[wants_complexity_course]`, `attribs[wants_civil_preparedness_cohort]`. Set `value="true"` on each.
+6. Push, Cloudflare Pages auto-deploys.
 
-Form HTML structure stays the same. Only the action URL and field names change.
+The merged welcome campaign uses Listmonk's Go-template conditionals to include only the lines for topics the subscriber actually ticked. See `welcome-emails.md` in `personal-assistant/projects/Personal/Marketing/expression-of-interest/` for the exact template.
+
+For per-topic broadcasts, create a campaign and set the segment filter to e.g. `attribs->>'wants_blog' = 'true'`.
 
 ## Privacy notice URL
 
