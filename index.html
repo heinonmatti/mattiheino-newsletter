@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Sign up for occasional emails from Matti T. J. Heino on complex systems, behaviour change, and civil preparedness.">
+<title>Notes from Matti T. J. Heino · newsletter.mattiheino.com</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..500&family=Inter:wght@400;500;600&display=swap">
+
+<style>
+  :root {
+    --paper:        #fbf9f4;
+    --paper-tint:   #f3eee2;
+    --ink:          #1a1a1a;
+    --ink-soft:     #44423d;
+    --ink-mute:     #74716a;
+    --rule:         #d8d2c0;
+    --accent:       #8a4f1f;
+
+    --serif: 'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
+    --sans:  'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --container: 640px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body { background: var(--paper); }
+
+  body {
+    font-family: var(--serif);
+    font-optical-sizing: auto;
+    font-size: 18px;
+    line-height: 1.6;
+    color: var(--ink);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .container {
+    max-width: var(--container);
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 28px 56px;
+  }
+
+  h1 {
+    font-family: var(--serif);
+    font-weight: 500;
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 1.15;
+    letter-spacing: -0.005em;
+    margin-bottom: 18px;
+    text-wrap: balance;
+  }
+
+  .lede {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 400;
+    color: var(--ink-soft);
+    font-size: 19px;
+    line-height: 1.55;
+    margin-bottom: 48px;
+    max-width: 36em;
+  }
+
+  h2 {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 13px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-mute);
+    margin-bottom: 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  /* ----- Form ----- */
+
+  form {
+    margin-bottom: 56px;
+  }
+
+  .intro {
+    font-family: var(--serif);
+    font-size: 17px;
+    margin-bottom: 22px;
+    color: var(--ink);
+  }
+
+  fieldset {
+    border: none;
+    margin-bottom: 28px;
+  }
+
+  legend { display: none; }
+
+  .check-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 14px;
+    padding: 12px 14px;
+    border: 1px solid var(--rule);
+    background: var(--paper-tint);
+    cursor: pointer;
+    transition: border-color 0.2s ease, background 0.2s ease;
+  }
+  .check-row:hover { border-color: var(--accent); }
+  .check-row input[type="checkbox"] {
+    margin-top: 5px;
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--accent);
+  }
+  .check-row .check-text {
+    flex: 1;
+    font-family: var(--serif);
+    font-size: 16.5px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+  .check-row .check-text strong {
+    font-weight: 600;
+  }
+  .check-row .check-text .note {
+    display: block;
+    color: var(--ink-soft);
+    font-size: 15px;
+    margin-top: 2px;
+  }
+
+  .field {
+    margin-bottom: 18px;
+  }
+  .field label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .field label .req { color: var(--accent); }
+  .field input[type="text"],
+  .field input[type="email"] {
+    width: 100%;
+    font-family: var(--serif);
+    font-size: 17px;
+    padding: 10px 12px;
+    border: 1px solid var(--rule);
+    background: white;
+    color: var(--ink);
+    transition: border-color 0.2s ease;
+  }
+  .field input[type="text"]:focus,
+  .field input[type="email"]:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+
+  button[type="submit"] {
+    font-family: var(--sans);
+    font-weight: 500;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    padding: 12px 28px;
+    border: 1px solid var(--ink);
+    background: var(--ink);
+    color: var(--paper);
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+  button[type="submit"]:hover {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .form-note {
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--ink-mute);
+    margin-top: 18px;
+    max-width: 44em;
+  }
+  .form-note a {
+    color: var(--accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+  }
+
+  /* ----- About ----- */
+
+  .about p {
+    font-family: var(--serif);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--ink);
+    max-width: 38em;
+  }
+
+  /* ----- Footer ----- */
+
+  footer {
+    margin-top: 64px;
+    padding-top: 24px;
+    border-top: 1px solid var(--rule);
+    font-family: var(--sans);
+    font-size: 13px;
+    color: var(--ink-mute);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+  footer a {
+    color: var(--ink-soft);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  footer a:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ----- Responsive ----- */
+
+  @media (max-width: 560px) {
+    .container { padding: 56px 22px 40px; }
+    body { font-size: 17px; }
+    h1 { font-size: 30px; }
+    .lede { font-size: 17.5px; margin-bottom: 36px; }
+  }
+</style>
+</head>
+<body>
+
+<main class="container">
+
+  <h1>Notes from Matti T. J. Heino</h1>
+
+  <p class="lede">Sign up for occasional emails on whatever you're interested in. No regular schedule; only when there's something worth saying.</p>
+
+  <section aria-labelledby="signup-heading">
+    <h2 id="signup-heading">Sign up</h2>
+
+    <!--
+      FORM-ACTION NOTE for Matti:
+      During Tuesday→Wednesday (backup phase): replace YOUR_FORMSPREE_ID below with the
+      ID of the new Formspree form you create at formspree.io.
+      Once Listmonk is online (Wednesday/Thursday), change the action to:
+        https://lists.mattiheino.com/subscription/form
+      and convert the three checkboxes' name="topic" values to name="l" with the
+      corresponding Listmonk list UUIDs.
+    -->
+    <form method="POST" action="https://formspree.io/f/YOUR_FORMSPREE_ID">
+
+      <p class="intro">Pick what you'd like to hear about. Tick any that apply.</p>
+
+      <fieldset>
+        <legend>Topics</legend>
+
+        <label class="check-row">
+          <input type="checkbox" name="topic" value="blog">
+          <span class="check-text">
+            <strong>New blog posts and research at mattiheino.com.</strong>
+            <span class="note">Sent when something is published.</span>
+          </span>
+        </label>
+
+        <label class="check-row">
+          <input type="checkbox" name="topic" value="complexity-course">
+          <span class="check-text">
+            <strong>A course on behaviour change in complex systems.</strong>
+            <span class="note">A possible course on bringing complex-systems thinking into behaviour-change practice. Tick to be told if it runs.</span>
+          </span>
+        </label>
+
+        <label class="check-row">
+          <input type="checkbox" name="topic" value="civil-preparedness-cohort">
+          <span class="check-text">
+            <strong>A course on European civil preparedness and networked resilience.</strong>
+            <span class="note">A possible cohort for people who plan preparedness at the community and town scale. Tick to be told if it runs.</span>
+          </span>
+        </label>
+
+      </fieldset>
+
+      <div class="field">
+        <label for="name">First name</label>
+        <input type="text" id="name" name="name" autocomplete="given-name">
+      </div>
+
+      <div class="field">
+        <label for="email">Email <span class="req">*</span></label>
+        <input type="email" id="email" name="email" autocomplete="email" required>
+      </div>
+
+      <button type="submit">Sign up</button>
+
+      <p class="form-note">
+        You'll receive a confirmation email; click the link inside to finish signing up.
+        Privacy notice: <a href="/privacy.html">/privacy.html</a>.
+      </p>
+
+    </form>
+  </section>
+
+  <section class="about" aria-labelledby="about-heading">
+    <h2 id="about-heading">About me</h2>
+    <p>I work at the intersection of complex systems and behaviour change. My affiliations are with the New England Complex Systems Institute (NECSI), the University of Heidelberg (Medical Faculty Mannheim), the University of Tampere, and the World Health Network. Locally, I run the Foresight &amp; Preparedness Forum in Hamina, Finland.</p>
+  </section>
+
+  <footer>
+    <a href="/privacy.html">Privacy notice</a>
+    <a href="https://www.mattiheino.com" target="_blank" rel="noopener">mattiheino.com</a>
+    <a href="https://github.com/heinonmatti" target="_blank" rel="noopener">GitHub</a>
+  </footer>
+
+</main>
+
+</body>
+</html>
