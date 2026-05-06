@@ -1,6 +1,6 @@
 # mattiheino-newsletter
 
-Static sign-up page for `newsletter.mattiheino.com`. Hosted on Cloudflare Pages, DNS at Cloudflare, form posts to a self-hosted Listmonk instance at `lists.mattiheino.com` running on the Hetzner VPS.
+Static sign-up page for `news.mattiheino.com`. Hosted on Cloudflare Pages, DNS at Cloudflare, form posts to a self-hosted Listmonk instance at `lists.mattiheino.com` running on the Hetzner VPS.
 
 Brand follows the ajatuspää käytäytymisarkkitehtuuri identity from mattiheino.com (sky-blue hero band with the two-heads logo, deep red as the title and CTA accent, warm cream page).
 
@@ -31,8 +31,8 @@ This collapses the email flow to one confirmation + one merged conditional welco
 
 1. Push to GitHub: `heinonmatti/mattiheino-newsletter` (public).
 2. Connect to Cloudflare Pages → Pages → Create project → Connect to Git → select this repo. Build command: empty. Output directory: `/` (root).
-3. Cloudflare DNS for `mattiheino.com` → add CNAME: `newsletter` → `<project>.pages.dev`, proxied (orange cloud).
-4. Cloudflare Pages → Custom domains → add `newsletter.mattiheino.com`. TLS provisions automatically.
+3. Cloudflare DNS for `mattiheino.com` → add CNAME: `news` → `<project>.pages.dev`, proxied (orange cloud).
+4. Cloudflare Pages → Custom domains → add `news.mattiheino.com`. TLS provisions automatically.
 
 ## Pre-deploy: substitute the Listmonk list UUID
 
