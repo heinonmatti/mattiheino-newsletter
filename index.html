@@ -375,15 +375,15 @@
     <h2 id="signup-heading">Sign up</h2>
 
     <!--
-      Form posts to the self-hosted Listmonk instance at lists.mattiheino.com.
-      The hidden `l` input below carries the UUID of the single Listmonk list
-      "Matti's notes". Listmonk reads the attribs[…] form fields as subscriber
-      attributes; per-topic broadcasts target subscribers via attribs.wants_<topic>.
+      Form posts to a Cloudflare Worker at submit.mattiheino.com that bridges
+      to Listmonk's admin API. Listmonk's public /subscription/form endpoint
+      silently drops attribs[…] fields, so the Worker rebuilds the subscriber
+      payload (master list UUID + selected topic-list UUIDs + attribs) and
+      POSTs it to /api/subscribers using a stored API token.
+      Worker source: personal-assistant/projects/Personal/Marketing/expression-of-interest/worker/
     -->
-    <form method="POST" action="https://lists.mattiheino.com/subscription/form">
+    <form method="POST" action="https://submit.mattiheino.com/">
 
-      <input type="hidden" name="l" value="c872b25c-f489-40fd-98a0-ac11e211650f">
-      <input type="hidden" name="nonce" value="">
 
       <p class="intro">Pick what you'd like to hear about. Tick any that apply.</p>
 
