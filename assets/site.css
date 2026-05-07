@@ -1,0 +1,52 @@
+/* Shared baseline styles for news.mattiheino.com static pages.
+   Each HTML page links this and supplies its own page-specific rules
+   (h1 sizing, page-specific block layouts, form styling, etc.) inline. */
+
+:root {
+    /* Brand palette extracted from the ajatuspää käytäytymisarkkitehtuuri logo (sampled pixels) */
+    --paper:        #fbf9f4;  /* page background – warm cream */
+    --paper-tint:   #f3eee2;  /* card / input background */
+    --sky:          #a6d9ec;  /* exact logo background blue (RGB 166, 217, 236) */
+    --sky-deep:     #7ab2c8;  /* derived darker sky for borders */
+    --red:          #890016;  /* exact logo red-building (RGB 137, 0, 22) */
+    --red-deep:     #6c0011;  /* derived darker red for hover */
+    --ink:          #1a1a1a;
+    --ink-soft:     #44423d;
+    --ink-mute:     #74716a;
+    --rule:         #d8d2c0;
+
+    --serif:        'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
+    --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+    --container:    660px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html, body { background: var(--paper); }
+
+.hero-band {
+    background: var(--sky);
+    padding: 32px 0 28px;
+    border-bottom: 1px solid color-mix(in srgb, var(--sky-deep) 60%, transparent);
+}
+.hero-image-wrap {
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 28px;
+    text-align: center;
+}
+.hero-image-wrap img { max-width: 100%; height: auto; display: inline-block; }
+
+.container {
+    max-width: var(--container);
+    width: 100%;
+    margin: 0 auto;
+    padding: 56px 28px 40px;
+}
+
+@media (max-width: 560px) {
+    .hero-band { padding: 24px 0 20px; }
+    .hero-image-wrap { padding: 0 20px; }
+    .container { padding: 40px 22px 32px; }
+}

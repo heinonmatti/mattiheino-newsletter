@@ -9,31 +9,9 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400..600;1,6..72,400..600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="/assets/site.css">
 
 <style>
-  :root {
-    /* Brand palette extracted from the ajatuspää käytark logo (sampled pixels) */
-    --paper:        #fbf9f4;  /* page background - warm cream */
-    --paper-tint:   #f3eee2;  /* card/input background */
-    --sky:          #a6d9ec;  /* exact logo background blue (RGB 166, 217, 236) */
-    --sky-deep:     #7ab2c8;  /* derived darker sky for borders */
-    --red:          #890016;  /* exact logo red-building (RGB 137, 0, 22) */
-    --red-deep:     #6c0011;  /* derived darker red for hover */
-    --ink:          #1a1a1a;
-    --ink-soft:     #44423d;
-    --ink-mute:     #74716a;
-    --rule:         #d8d2c0;
-
-    --serif:        'Newsreader', 'Iowan Old Style', Georgia, 'Palatino', serif;
-    --sans:         'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-
-    --container: 660px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html, body { background: var(--paper); }
-
   body {
     font-family: var(--serif);
     font-optical-sizing: auto;
@@ -43,35 +21,6 @@
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
-  }
-
-  /* ----- Hero band ----- */
-
-  .hero-band {
-    background: var(--sky);
-    padding: 32px 0 28px;
-    border-bottom: 1px solid color-mix(in srgb, var(--sky-deep) 60%, transparent);
-  }
-  .hero-image-wrap {
-    max-width: 720px;
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 28px;
-    text-align: center;
-  }
-  .hero-image-wrap img {
-    max-width: 100%;
-    height: auto;
-    display: inline-block;
-  }
-
-  /* ----- Container ----- */
-
-  .container {
-    max-width: var(--container);
-    width: 100%;
-    margin: 0 auto;
-    padding: 56px 28px 40px;
   }
 
   /* ----- Type ----- */
@@ -346,9 +295,6 @@
   /* ----- Responsive ----- */
 
   @media (max-width: 560px) {
-    .hero-band { padding: 24px 0 20px; }
-    .hero-image-wrap { padding: 0 20px; }
-    .container { padding: 40px 22px 32px; }
     body { font-size: 17px; }
     h1 { font-size: 28px; }
     .lede { font-size: 17px; margin-bottom: 36px; }
@@ -384,7 +330,6 @@
     -->
     <form method="POST" action="https://submit.mattiheino.com/">
 
-
       <p class="intro">Pick what you'd like to hear about. Tick any that apply.</p>
 
       <fieldset>
@@ -399,7 +344,7 @@
         </label>
 
         <div class="topic-divider" role="separator" aria-label="Upcoming courses">
-          <span class="label">You can find my content on e.g. <a href="https://www.youtube.com/playlist?list=PLcKToLYD7YE3qcS2NsXer03bRaSQDOh4L" target="_blank" rel="noopener">YouTube</a>, but I also instruct (non-free) courses on the New England Complex Systems Institute platform:</span>
+          <span class="label">You can find my content directed to students on e.g. <a href="https://www.youtube.com/playlist?list=PLcKToLYD7YE3qcS2NsXer03bRaSQDOh4L" target="_blank" rel="noopener">YouTube</a>. Professionals have different needs, so I also instruct (non-free) courses on the New England Complex Systems Institute platform:</span>
         </div>
 
         <label class="check-row">
@@ -418,8 +363,8 @@
         <label class="check-row">
           <input type="checkbox" name="attribs[wants_civil_preparedness_cohort]" value="true" data-toggles="civil-preparedness-interest">
           <span class="check-text">
-            <strong>A course on European civil preparedness and networked resilience (NEW!)</strong>
-            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility in Europe. Focus on the critical "Missing Middle" scale between individuals and institutions. No date yet, tick to be notified when it runs.</span>
+            <strong>A course on European multi-hazard civil preparedness (NEW!)</strong>
+            <span class="note">A cohort for people involved in increasing civil preparedness, resilience, and antifragility in Europe. Focus on the critical "Missing Middle"; networks between individuals and institutions, which make or break responses. In planning mode, tick to be notified when we have dates (see also <a href="https://www.preparedness.fi" target="_blank" rel="noopener">preparedness.fi</a>).</span>
           </span>
         </label>
 
@@ -452,7 +397,8 @@
 
   <section class="about" aria-labelledby="about-heading">
     <h2 id="about-heading">About me</h2>
-    <p>I work at the intersection of complex systems, behaviour change, and sensemaking – my PhD having been about bridging behaviour change and complexity sciences. I have led an applied life from the military to marketing and startups, more recently in e.g. the Finnish Behavioural Policy Team at the Prime Minister's Office. My current affiliations are with the New England Complex Systems Institute (NECSI), Heidelberg University (Medical Faculty Mannheim), Tampere University (Unit of Social Research: Social Psychology), and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
+    <p>I work at the intersection of complex systems, behaviour change, and sensemaking – my PhD having been about bridging behaviour change and complexity sciences. I have led an applied life from the military to marketing and startups, more recently in e.g. the Finnish Behavioural Policy Team at the Prime Minister's Office. I'm a trainer in the Finnish 72hours.fi preparedness concept.</p><br>
+	<p>My current affiliations are with the New England Complex Systems Institute (NECSI), Heidelberg University (Medical Faculty Mannheim), Tampere University (Unit of Social Research: Social Psychology), and the World Health Network. I'm also involved in hands-on local community resilience work in Finland, the Eastern flank of Europe.</p>
   </section>
 
   <footer>
